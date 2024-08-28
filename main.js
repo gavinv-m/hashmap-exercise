@@ -28,3 +28,6 @@ console.log(test.remove('frog'));
 
 // Number of keys
 console.log(test.length());
+
+// Clear hash map
+// test.clear();

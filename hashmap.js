@@ -2,7 +2,7 @@
 export default function hashMap() {
   let tableSize = 12;
   let numberOkKeys = 0;
-  const hashMap = new Array(tableSize);
+  let hashMap = new Array(tableSize).fill(undefined);
 
   const hash = function generateHashCode(key) {
     let hashCode = 0;
@@ -106,6 +106,10 @@ export default function hashMap() {
     return numberOkKeys;
   };
 
+  const clear = function clearHashMap() {
+    hashMap = new Array(tableSize).fill(undefined);
+  };
+
   return {
     hashMap,
     set,
@@ -113,5 +117,6 @@ export default function hashMap() {
     has,
     remove,
     length,
+    clear,
   };
 }
