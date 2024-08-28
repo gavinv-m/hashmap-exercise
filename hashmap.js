@@ -50,6 +50,16 @@ export default function hashMap() {
     return traverseRemove(key, list.nextNode);
   };
 
+  const returnArray = function returnRequestedType(list, type) {
+    if (list.nextNode === null) {
+      return [list[type]];
+    }
+
+    const array = returnArray(list.nextNode, type);
+    array.push(list[type]);
+    return array;
+  };
+
   const updateKey = function updateKeyValue(key, value, list) {
     if (list.nextNode === null) {
       return false;
@@ -110,6 +120,24 @@ export default function hashMap() {
     hashMap = new Array(tableSize).fill(undefined);
   };
 
+  const extract = function extractFromHashMap(type) {
+    const array = [];
+    hashMap.forEach((bucket) => {
+      if (bucket !== undefined) {
+        array.push(...returnArray(bucket, type));
+      }
+    });
+    return array;
+  };
+
+  const keys = function returnKeys() {
+    return extract('key');
+  };
+
+  const values = function returnValues() {
+    return extract('value');
+  };
+
   return {
     hashMap,
     set,
@@ -118,5 +146,7 @@ export default function hashMap() {
     remove,
     length,
     clear,
+    keys,
+    values,
   };
 }

@@ -31,3 +31,9 @@ console.log(test.length());
 
 // Clear hash map
 // test.clear();
+
+// Return keys
+console.log(test.keys());
+
+// Return values
+console.log(test.values());
