@@ -27,6 +27,28 @@ export default function hashMap() {
     return traverse(key, list.nextNode);
   };
 
+  const traverseRemove = function traverseAndRemove(key, list, index) {
+    // Not found
+    if (list.nextNode === null && list.key !== key) {
+      return false;
+    }
+
+    // Only node in list
+    if (list.key === key && list.nextNode === null) {
+      hashMap[index] = undefined;
+      return true;
+    }
+
+    // Node to remove
+    if (list.nextNode.key === key) {
+      const remainingNodes = list.nextNode.nextNode;
+      list.nextNode = remainingNodes;
+      return true;
+    }
+
+    return traverseRemove(key, list.nextNode);
+  };
+
   const updateKey = function updateKeyValue(key, value, list) {
     if (list.nextNode === null) {
       return false;
@@ -68,10 +90,17 @@ export default function hashMap() {
     return traverse(key, list) !== null;
   };
 
+  const remove = function removeKey(key) {
+    const index = hash(key);
+    const list = hashMap[index];
+    return traverseRemove(key, list, index);
+  };
+
   return {
     hashMap,
     set,
     get,
     has,
+    remove,
   };
 }

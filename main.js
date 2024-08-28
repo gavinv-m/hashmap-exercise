@@ -16,9 +16,12 @@ test.set('kite', 'pink');
 test.set('lion', 'golden');
 
 // Get method
-console.log(test.get('apple'));
-console.log(test.get('kite'));
+// console.log(test.get('apple'));
+// console.log(test.get('kite'));
 
 // Has method
-console.log(test.has('apple'));
-console.log(test.has('cheese'));
+// console.log(test.has('apple'));
+// console.log(test.has('cheese'));
+
+// Remove method
+console.log(test.remove('frog'));
