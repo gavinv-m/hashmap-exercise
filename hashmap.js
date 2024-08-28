@@ -1,5 +1,6 @@
 // Exports to main.js
 export default function hashMap() {
+  const loadFactor = 0.75;
   let tableSize = 12;
   let numberOkKeys = 0;
   let hashMap = new Array(tableSize).fill(undefined);
@@ -57,6 +58,18 @@ export default function hashMap() {
 
     const array = returnArray(list.nextNode, type);
     array.push(list[type]);
+    return array;
+  };
+
+  const returnEntryArray = function returnPairs(list) {
+    const array = [];
+    while (list !== null) {
+      const { key, value } = list;
+      const pairsArray = [key, value];
+      array.push(pairsArray);
+      list = list.nextNode;
+    }
+
     return array;
   };
 
@@ -138,6 +151,17 @@ export default function hashMap() {
     return extract('value');
   };
 
+  const entries = function returnEntries() {
+    const array = [];
+    hashMap.forEach((bucket) => {
+      if (bucket !== undefined) {
+        array.push(...returnEntryArray(bucket));
+      }
+    });
+
+    return array;
+  };
+
   return {
     hashMap,
     set,
@@ -148,5 +172,6 @@ export default function hashMap() {
     clear,
     keys,
     values,
+    entries,
   };
 }

@@ -33,7 +33,14 @@ console.log(test.length());
 // test.clear();
 
 // Return keys
-console.log(test.keys());
+// console.log(test.keys());
 
 // Return values
-console.log(test.values());
+// console.log(test.values());
+
+// Return entries
+console.log(test.entries());
+
+// Update key
+test.set('apple', 'brat');
+console.log(test.entries());
