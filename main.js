@@ -25,3 +25,6 @@ test.set('lion', 'golden');
 
 // Remove method
 console.log(test.remove('frog'));
+
+// Number of keys
+console.log(test.length());

@@ -1,6 +1,7 @@
 // Exports to main.js
 export default function hashMap() {
   let tableSize = 12;
+  let numberOkKeys = 0;
   const hashMap = new Array(tableSize);
 
   const hash = function generateHashCode(key) {
@@ -67,6 +68,7 @@ export default function hashMap() {
 
     if (hashMap[index] === undefined) {
       hashMap[index] = { key, value, nextNode: null };
+      numberOkKeys += 1;
       return;
     }
 
@@ -78,6 +80,7 @@ export default function hashMap() {
     const headNode = hashMap[index];
     const newNode = { key, value, nextNode: headNode };
     hashMap[index] = newNode;
+    numberOkKeys += 1;
   };
 
   const get = function getKeyValue(key) {
@@ -93,7 +96,14 @@ export default function hashMap() {
   const remove = function removeKey(key) {
     const index = hash(key);
     const list = hashMap[index];
-    return traverseRemove(key, list, index);
+    const result = traverseRemove(key, list, index);
+    if (result === true) numberOkKeys -= 1;
+
+    return result;
+  };
+
+  const length = function returnNumberOfKeys() {
+    return numberOkKeys;
   };
 
   return {
@@ -102,5 +112,6 @@ export default function hashMap() {
     get,
     has,
     remove,
+    length,
   };
 }
